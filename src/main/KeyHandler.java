@@ -1,5 +1,7 @@
 package main;
 
+import character.Player;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -18,14 +20,15 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();
 
+        // TITLE STATE
         if (gp.gameState == gp.titleState) {
-            if (keyCode == KeyEvent.VK_W) {
+            if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
                 gp.ui.menuNum--;
                 if (gp.ui.menuNum < 0) {
                     gp.ui.menuNum = 2;
                 }
             }
-            if (keyCode == KeyEvent.VK_S) {
+            if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
                 gp.ui.menuNum++;
                 if (gp.ui.menuNum > 2) {
                     gp.ui.menuNum = 0;
@@ -45,7 +48,29 @@ public class KeyHandler implements KeyListener {
         }
 
         if (gp.gameState == gp.charSelectState) {
+            if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_LEFT) {
+                gp.ui.charNum--;
+                if (gp.ui.charNum < 0) {
+                    gp.ui.charNum = 2;
+                }
+            }
+            if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT) {
+                gp.ui.charNum++;
+                if (gp.ui.charNum > 2) {
+                    gp.ui.charNum = 0;
+                }
+            }
+
             if (keyCode == KeyEvent.VK_SPACE) {
+                if (gp.ui.charNum == 0) {
+                    gp.player.setPlayerName("hemingway");
+                }
+                if (gp.ui.charNum == 1) {
+                    gp.player.setPlayerName("vonnegut");
+                }
+                if (gp.ui.charNum == 2) {
+                    gp.player.setPlayerName("plath");
+                }
                 gp.gameState = gp.playState;
             }
         }

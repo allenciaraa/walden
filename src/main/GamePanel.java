@@ -100,6 +100,8 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         if (gameState == playState) {
+            player.setPlayerImages();
+
             // map
             tm.draw(g2);
 

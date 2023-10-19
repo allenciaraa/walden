@@ -1,6 +1,9 @@
 package main;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class UI {
     GamePanel gp;
@@ -69,34 +72,59 @@ public class UI {
     }
 
     public void drawCharacterSelectScreen() {
+
+        BufferedImage hemingway = null;
+        BufferedImage plath = null;
+        BufferedImage vonnegut = null;
+
+        try {
+            hemingway = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/front.png"));
+            vonnegut = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/front.png"));
+            plath = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/front.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         g2.setFont(arial_40);
         g2.setColor(Color.WHITE);
 
         String name = "Hemingway";
         int x = gp.tileSize;
-        int y = gp.tileSize*4;
+        int y = gp.tileSize * 5;
         g2.drawString(name, x, y);
+        if (charNum == 0) {
+            g2.drawString(">", x-gp.tileSize/2, y);
+        }
+
+        int x2 = x + (gp.tileSize/2);
+        int y2 = y - gp.tileSize * 3;
+        g2.drawImage(hemingway, x2, y2, gp.tileSize*2, gp.tileSize*2, null);
 
         name = "Vonnegut";
         x += gp.tileSize*4;
         g2.drawString(name, x, y);
+        if (charNum == 1) {
+            g2.drawString(">", x-gp.tileSize/2, y);
+        }
+
+        x2 = x + (gp.tileSize/2);
+        g2.drawImage(vonnegut, x2, y2, gp.tileSize*2, gp.tileSize*2, null);
+
 
         name = "Plath";
         x += gp.tileSize*4;
         g2.drawString(name, x, y);
+        if (charNum == 2) {
+            g2.drawString(">", x-gp.tileSize/2, y);
+        }
 
-        name = "Fitzgerald";
-        x = gp.tileSize;
-        y += gp.tileSize*4;
-        g2.drawString(name, x, y);
+        g2.drawImage(plath, x, y2, gp.tileSize*2, gp.tileSize*2, null);
 
-        name = "Salinger";
-        x += gp.tileSize*4;
-        g2.drawString(name, x, y);
 
-        name = "Dickinson";
-        x += gp.tileSize*3;
-        g2.drawString(name, x, y);
+        String instructions = "Press SPACE to begin!";
+        x = 100;
+        y = gp.tileSize*7;
+        g2.drawString(instructions, x, y);
 
     }
 
