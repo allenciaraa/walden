@@ -1,5 +1,7 @@
 package main;
 
+import object.Page;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,11 +13,23 @@ public class UI {
     Font arial_40, arial_80b;
     int menuNum = 0;
     int charNum = 0;
+    BufferedImage pageImg;
+    public boolean msgOn = false;
+    public String msg = "";
+    int msgCounter = 0;
+    public boolean gameFinished = false;
 
     public UI(GamePanel gp) {
         this.gp = gp;
         arial_40 = new Font("Arial", Font.PLAIN, 40);
         arial_80b = new Font("Arial", Font.BOLD, 80);
+        Page page = new Page();
+        pageImg = page.image;
+    }
+
+    public void showMessage(String text) {
+        msg = text;
+        msgOn = true;
     }
 
     public void draw(Graphics2D g2) {
@@ -28,7 +42,7 @@ public class UI {
             drawCharacterSelectScreen();
         }
         if (gp.gameState == gp.playState) {
-            // TODO: implement play state
+            drawUI();
         }
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
@@ -129,12 +143,55 @@ public class UI {
     }
 
     public void drawPauseScreen() {
-        // TODO: implement pause screen
+        String text = "PAUSED";
+        int x = getXForCenteredText(text);
+        int y = gp.screenHeight/2;
+        g2.drawString(text, x, y);
+    }
+
+    public void drawUI() {
+        if (gameFinished) {
+            g2.setFont(arial_40);
+            g2.setColor(Color.white);
+
+            String text;
+            int x, y;
+
+            text = "You found the missing manuscript!";
+            x = getXForCenteredText(text);
+            y = gp.screenHeight/2 - (gp.tileSize*3);
+            g2.drawString(text, x, y);
+
+            g2.setFont(arial_80b);
+            g2.setColor(Color.yellow);
+            text = "Congratulations!";
+            x = getXForCenteredText(text);
+            y = gp.screenHeight/2 + (gp.tileSize*2);
+            g2.drawString(text, x, y);
+        } else {
+
+            g2.setFont(arial_40);
+            g2.setColor(Color.white);
+            g2.drawImage(pageImg, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
+            g2.drawString("x " + gp.player.hasPages, 97, 77);
+
+            if (msgOn) {
+                g2.setFont(g2.getFont().deriveFont(30F)); // takes default font, makes it smaller
+                g2.drawString(msg, gp.tileSize / 2, gp.tileSize * 7);
+
+                msgCounter++;
+            }
+
+            // make message disappear after 2 seconds
+            if (msgCounter > 120) {
+                msgCounter = 0;
+                msgOn = false;
+            }
+        }
     }
 
     public int getXForCenteredText(String text) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
-        int x = (gp.screenWidth / 2) - (length / 2);
-        return x;
+        return (gp.screenWidth / 2) - (length / 2);
     }
 }

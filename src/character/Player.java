@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player extends Character {
+public class Player extends Entity {
     GamePanel gp;
     KeyHandler kh;
 
@@ -16,6 +16,7 @@ public class Player extends Character {
     public final int screenY;
 
     String name = "vonnegut";
+    public int hasPages = 0;
 
     public Player(GamePanel gp, KeyHandler kh) {
         this.gp = gp;
@@ -178,26 +179,59 @@ public class Player extends Character {
     public void pickUpObject(int idx) {
         if (idx != 999) {
             String objName = gp.objs[idx].name;
+
+
             switch (objName) {
                 case "Page":
-                    // play sound effect
-                    // increase page count
-                    // set object to null
-                    // show a message in ui
+                    hasPages++;
+                    gp.objs[idx] = null;
+                    gp.playSoundEffect(4);
+                    gp.ui.showMessage("I got a page!");
                     break;
                 case "Alcohol":
-                    // play sound effect
-                    // change music
-                    // slow down speed
-                    // set object to null
-                    // show a message in ui
+                    if (speed > 4) {
+                        speed -= 4;
+                    } else {
+                        speed = 1;
+                    }
+                    gp.playSoundEffect(4);
+                    gp.ui.showMessage("A little drinky drink? Don't mind if I do.");
+                    gp.objs[idx] = null;
                     break;
                 case "Coffee":
-                    // play sound effect
-                    // change music
-                    // set object to null
-                    // show a message in ui
+                    gp.playSoundEffect(4);
+                    gp.ui.showMessage("Omg starbucks.");
+                    speed += 4;
+                    gp.objs[idx] = null;
                     break;
+                case "Door":
+                    if (hasPages < 1) {
+                        gp.playSoundEffect(4);
+                        gp.ui.showMessage("You need to complete the manuscript. Get " + (3 - hasPages) + " more!");
+                    } else {
+                        gp.objs[idx] = null;
+                        gp.ui.gameFinished = true;
+                        gp.stopMusic();
+                        gp.playSoundEffect(3);
+                    }
+                    break;
+            }
+
+            if (speed >= 6) {
+                if (gp.currentSong != 2) {
+                    gp.stopMusic();
+                    gp.playMusic(2);
+                }
+            } else if (speed <= 2) {
+                if (gp.currentSong != 1) {
+                    gp.stopMusic();
+                    gp.playMusic(1);
+                }
+            } else {
+                if (gp.currentSong != 0) {
+                    gp.stopMusic();
+                    gp.playMusic(0);
+                }
             }
         }
     }

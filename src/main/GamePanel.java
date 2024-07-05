@@ -27,14 +27,17 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     KeyHandler kh = new KeyHandler(this);
     TileManager tm = new TileManager(this);
-    UI ui = new UI(this);
+    Sound music = new Sound();
+    public int currentSong;
+    Sound se = new Sound();
+    public UI ui = new UI(this);
     public Collision cc = new Collision(this);
     public Assets as = new Assets(this);
     public Player player = new Player(this, kh);
 
 
     // Game State
-    public GameObject objs[] = new GameObject[10];
+    public GameObject[] objs = new GameObject[10];
     public int gameState;
     public final int titleState = 0;
     public final int charSelectState = 1;
@@ -51,6 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         as.setObjects();
+        playMusic(0); // plays theme song from the time the game is opened
         gameState = titleState;
     }
 
@@ -61,7 +65,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000/fps;
+        double drawInterval = 1000000000 / fps;
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while (gameThread != null) {
@@ -84,7 +88,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+        if (gameState == playState) {
+            player.update();
+        }
+        if (gameState == pauseState) {
+
+        }
+
+
     }
 
     public void paintComponent(Graphics g) {
@@ -108,13 +119,31 @@ public class GamePanel extends JPanel implements Runnable {
             //player
             player.draw(g2);
 
-            for (int i = 0; i < objs.length; i++) {
-                if (objs[i] != null) {
-                    objs[i].draw(g2, this);
+            ui.draw(g2);
+
+            for (GameObject obj : objs) {
+                if (obj != null) {
+                    obj.draw(g2, this);
                 }
             }
         }
 
         g2.dispose();
+    }
+
+    public void playMusic(int i) {
+        currentSong = i;
+        music.setFile(i);
+        music.play();
+        music.loop();
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
+
+    public void playSoundEffect(int i) {
+        se.setFile(i);
+        se.play();
     }
 }

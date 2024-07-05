@@ -88,7 +88,17 @@ public class KeyHandler implements KeyListener {
             if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
                 rightPressed = true;
             }
+            if (keyCode == KeyEvent.VK_P) {
+                gp.gameState = gp.pauseState;
+            }
         }
+
+        if (gp.gameState == gp.pauseState) {
+            if (keyCode == KeyEvent.VK_P) {
+                gp.gameState = gp.playState;
+            }
+        }
+
 
     }
 
@@ -108,5 +118,6 @@ public class KeyHandler implements KeyListener {
         if (keyCode == KeyEvent.VK_D  || keyCode == KeyEvent.VK_RIGHT) {
             rightPressed = false;
         }
+
     }
 }
