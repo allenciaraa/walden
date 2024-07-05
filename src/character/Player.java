@@ -37,8 +37,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultValues() {
-        worldX = gp.tileSize*14;
-        worldY = gp.tileSize*6;
+        worldX = gp.tileSize * 28;
+        worldY = gp.tileSize * 13;
         speed = 4;
         direction = "down";
     }
@@ -190,7 +190,7 @@ public class Player extends Entity {
                     break;
                 case "Alcohol":
                     if (speed > 4) {
-                        speed -= 4;
+                        speed -= 2;
                     } else {
                         speed = 1;
                     }
@@ -201,7 +201,7 @@ public class Player extends Entity {
                 case "Coffee":
                     gp.playSoundEffect(4);
                     gp.ui.showMessage("Omg starbucks.");
-                    speed += 4;
+                    speed += 2;
                     gp.objs[idx] = null;
                     break;
                 case "Door":

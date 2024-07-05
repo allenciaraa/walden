@@ -15,20 +15,40 @@ public class Assets {
 
     public void setObjects() {
         gp.objs[0] = new Page();
-        gp.objs[0].worldX = 6 * gp.tileSize;
-        gp.objs[0].worldY = 8 * gp.tileSize;
+        gp.objs[0].worldX = 8 * gp.tileSize;
+        gp.objs[0].worldY = 13 * gp.tileSize;
 
-        gp.objs[1] = new Alcohol();
-        gp.objs[1].worldX = 10 * gp.tileSize;
-        gp.objs[1].worldY = 8 * gp.tileSize;
+        gp.objs[1] = new Page();
+        gp.objs[1].worldX = 11 * gp.tileSize;
+        gp.objs[1].worldY = 33 * gp.tileSize;
 
-        gp.objs[2] = new Coffee();
-        gp.objs[2].worldX = 14 * gp.tileSize;
-        gp.objs[2].worldY = 8 * gp.tileSize;
+        gp.objs[2] = new Page();
+        gp.objs[2].worldX = 40 * gp.tileSize;
+        gp.objs[2].worldY = 22 * gp.tileSize;
 
-        gp.objs[3] = new Door();
-        gp.objs[3].worldX = 12 * gp.tileSize;
-        gp.objs[3].worldY = 22 * gp.tileSize;
+        gp.objs[3] = new Alcohol();
+        gp.objs[3].worldX = 27 * gp.tileSize;
+        gp.objs[3].worldY = 9 * gp.tileSize;
+
+        gp.objs[4] = new Alcohol();
+        gp.objs[4].worldX = 36 * gp.tileSize;
+        gp.objs[4].worldY = 13 * gp.tileSize;
+
+        gp.objs[5] = new Alcohol();
+        gp.objs[5].worldX = 35 * gp.tileSize;
+        gp.objs[5].worldY = 30 * gp.tileSize;
+
+        gp.objs[6] = new Coffee();
+        gp.objs[6].worldX = 25 * gp.tileSize;
+        gp.objs[6].worldY = 21 * gp.tileSize;
+
+        gp.objs[7] = new Coffee();
+        gp.objs[7].worldX = 28 * gp.tileSize;
+        gp.objs[7].worldY = 38 * gp.tileSize;
+
+        gp.objs[8] = new Door();
+        gp.objs[8].worldX = 36 * gp.tileSize;
+        gp.objs[8].worldY = 38 * gp.tileSize;
 
 
     }
