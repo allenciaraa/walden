@@ -102,14 +102,6 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        if (gameState == titleState) {
-            ui.draw(g2);
-        }
-
-        if (gameState == charSelectState) {
-            ui.draw(g2);
-        }
-
         if (gameState == playState) {
             player.setPlayerImages();
 
@@ -119,7 +111,7 @@ public class GamePanel extends JPanel implements Runnable {
             //player
             player.draw(g2);
 
-            ui.draw(g2);
+//            ui.draw(g2);
 
             for (GameObject obj : objs) {
                 if (obj != null) {
@@ -127,6 +119,8 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
         }
+
+        ui.draw(g2);
 
         g2.dispose();
     }

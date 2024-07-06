@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity {
     GamePanel gp;
@@ -50,35 +51,35 @@ public class Player extends Entity {
     public void setPlayerImages() {
         try {
             if (name.equals("hemingway")) {
-                front = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/front.png"));
-                up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/up1.png"));
-                up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/up2.png"));
-                down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/down1.png"));
-                down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/down2.png"));
-                left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/left1.png"));
-                left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/left2.png"));
-                right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/right1.png"));
-                right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/hemingway/right2.png"));
+                front = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/front.png")));
+                up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/up1.png")));
+                up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/up2.png")));
+                down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/down1.png")));
+                down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/down2.png")));
+                left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/left1.png")));
+                left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/left2.png")));
+                right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/right1.png")));
+                right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/right2.png")));
             } else if (name.equals("plath")) {
-                front = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/front.png"));
-                up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/up1.png"));
-                up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/up2.png"));
-                down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/down1.png"));
-                down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/down2.png"));
-                left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/left1.png"));
-                left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/left2.png"));
-                right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/right1.png"));
-                right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/plath/right2.png"));
+                front = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/front.png")));
+                up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/up1.png")));
+                up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/up2.png")));
+                down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/down1.png")));
+                down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/down2.png")));
+                left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/left1.png")));
+                left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/left2.png")));
+                right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/right1.png")));
+                right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/right2.png")));
             } else {
-                front = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/front.png"));
-                up1 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/up1.png"));
-                up2 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/up2.png"));
-                down1 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/down1.png"));
-                down2 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/down2.png"));
-                left1 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/left1.png"));
-                left2 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/left2.png"));
-                right1 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/right1.png"));
-                right2 = ImageIO.read(getClass().getResourceAsStream("/sprites/vonnegut/right2.png"));
+                front = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/front.png")));
+                up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/up1.png")));
+                up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/up2.png")));
+                down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/down1.png")));
+                down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/down2.png")));
+                left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/left1.png")));
+                left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/left2.png")));
+                right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/right1.png")));
+                right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/right2.png")));
             }
 
         } catch (IOException e) {
@@ -205,7 +206,7 @@ public class Player extends Entity {
                     gp.objs[idx] = null;
                     break;
                 case "Door":
-                    if (hasPages < 1) {
+                    if (hasPages < 3) {
                         gp.playSoundEffect(4);
                         gp.ui.showMessage("You need to complete the manuscript. Get " + (3 - hasPages) + " more!");
                     } else {

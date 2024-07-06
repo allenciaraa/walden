@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     GamePanel gp;
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -39,7 +39,7 @@ public class KeyHandler implements KeyListener {
                     gp.gameState = gp.charSelectState;
                 }
                 if (gp.ui.menuNum == 1) {
-                    // TODO: implement load state
+                    // TODO: implement tutorial
                 }
                 if (gp.ui.menuNum == 2) {
                     System.exit(0);
@@ -49,27 +49,28 @@ public class KeyHandler implements KeyListener {
 
         if (gp.gameState == gp.charSelectState) {
             if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_LEFT) {
-                gp.ui.charNum--;
-                if (gp.ui.charNum < 0) {
-                    gp.ui.charNum = 2;
+                gp.ui.writerNum--;
+                if (gp.ui.writerNum < 0) {
+                    gp.ui.writerNum = 2;
                 }
             }
             if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT) {
-                gp.ui.charNum++;
-                if (gp.ui.charNum > 2) {
-                    gp.ui.charNum = 0;
+                gp.ui.writerNum++;
+                if (gp.ui.writerNum > 2) {
+                    gp.ui.writerNum = 0;
                 }
             }
 
             if (keyCode == KeyEvent.VK_SPACE) {
-                if (gp.ui.charNum == 0) {
+
+                if (gp.ui.writerNum == 0) {
                     gp.player.setPlayerName("hemingway");
                 }
-                if (gp.ui.charNum == 1) {
-                    gp.player.setPlayerName("vonnegut");
-                }
-                if (gp.ui.charNum == 2) {
+                if (gp.ui.writerNum == 1) {
                     gp.player.setPlayerName("plath");
+                }
+                if (gp.ui.writerNum == 2) {
+                    gp.player.setPlayerName("vonnegut");
                 }
                 gp.gameState = gp.playState;
             }
@@ -89,6 +90,7 @@ public class KeyHandler implements KeyListener {
                 rightPressed = true;
             }
             if (keyCode == KeyEvent.VK_P) {
+                System.out.println("PAUSE TEST TEST");
                 gp.gameState = gp.pauseState;
             }
         }
