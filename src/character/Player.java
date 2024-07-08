@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Entity {
     GamePanel gp;
@@ -18,6 +19,12 @@ public class Player extends Entity {
 
     String name = "vonnegut";
     public int hasPages = 0;
+    public int activeAlcohol = 0;
+    int alcoholCtr = 0;
+    public int activeCoffee = 0;
+    int coffeeCtr = 0;
+    int swayDir = 0;
+    int swayCtr = 15;
 
     public Player(GamePanel gp, KeyHandler kh) {
         this.gp = gp;
@@ -108,19 +115,60 @@ public class Player extends Entity {
             int objIdx = gp.cc.checkObject(this, true);
             pickUpObject(objIdx);
 
+
             if (!collisionOn) {
+                if (activeAlcohol > 0) {
+                    if (swayCtr >= 30) {
+                        Random random = new Random();
+                        swayDir = random.nextInt(2);
+                        swayCtr = 0;
+                    }
+                }
+
                 switch (direction) {
                     case "up":
                         worldY -= speed;
+                        if (activeAlcohol > 0) {
+                            if (swayDir == 0) {
+                                worldX++;
+                            } else {
+                                worldX--;
+                            }
+                            swayCtr++;
+                        }
                         break;
                     case "down":
                         worldY += speed;
+                        if (activeAlcohol > 0) {
+                            if (swayDir == 0) {
+                                worldX++;
+                            } else {
+                                worldX--;
+                            }
+                            swayCtr++;
+                        }
                         break;
                     case "left":
                         worldX -= speed;
+                        if (activeAlcohol > 0) {
+                            if (swayDir == 0) {
+                                worldY++;
+                            } else {
+                                worldY--;
+                            }
+                            swayCtr++;
+                        }
                         break;
                     case "right":
                         worldX += speed;
+                        if (activeAlcohol > 0) {
+                            if (swayDir == 0) {
+                                worldY++;
+                            } else {
+                                worldY--;
+                            }
+                            swayCtr++;
+                        }
                         break;
                 }
             }
@@ -133,6 +181,28 @@ public class Player extends Entity {
                     spriteVersion = 1;
                 }
                 stepCounter = 0;
+            }
+        }
+
+        if (activeAlcohol > 0) {
+            if (alcoholCtr < 600) {
+                alcoholCtr++;
+            } else {
+                activeAlcohol--;
+                speed += 2;
+                alcoholCtr = 0;
+                setMusic();
+            }
+        }
+
+        if (activeCoffee > 0) {
+            if (coffeeCtr < 600) {
+                coffeeCtr++;
+            } else {
+                activeCoffee--;
+                speed -= 2;
+                coffeeCtr = 0;
+                setMusic();
             }
         }
     }
@@ -190,11 +260,8 @@ public class Player extends Entity {
                     gp.ui.showMessage("I got a page!");
                     break;
                 case "Alcohol":
-                    if (speed > 4) {
-                        speed -= 2;
-                    } else {
-                        speed = 1;
-                    }
+                    activeAlcohol++;
+                    speed -= 2;
                     gp.playSoundEffect(4);
                     gp.ui.showMessage("A little drinky drink? Don't mind if I do.");
                     gp.objs[idx] = null;
@@ -202,6 +269,7 @@ public class Player extends Entity {
                 case "Coffee":
                     gp.playSoundEffect(4);
                     gp.ui.showMessage("Omg starbucks.");
+                    activeCoffee++;
                     speed += 2;
                     gp.objs[idx] = null;
                     break;
@@ -218,23 +286,64 @@ public class Player extends Entity {
                     break;
             }
 
-            if (speed >= 6) {
-                if (gp.currentSong != 2) {
-                    gp.stopMusic();
-                    gp.playMusic(2);
-                }
-            } else if (speed <= 2) {
-                if (gp.currentSong != 1) {
-                    gp.stopMusic();
-                    gp.playMusic(1);
-                }
-            } else {
-                if (gp.currentSong != 0) {
-                    gp.stopMusic();
-                    gp.playMusic(0);
-                }
-            }
+            setMusic();
+
+
         }
     }
 
+    // TODO: maybe turn this into a switch statement or something, def at least an if-else block
+    public void setMusic() {
+        // if no active substances play regular song
+        if (activeAlcohol == 0 && activeCoffee == 0) {
+            if (gp.currentSong != 0) {
+                gp.stopMusic();
+                gp.playMusic(0);
+            }
+        }
+        // if 1 drink play slightly drunk music
+        if (activeAlcohol == 1 && activeCoffee == 0) {
+            if (gp.currentSong != 1) {
+                gp.stopMusic();
+                gp.playMusic(1);
+            }
+        }
+        // if 2 drinks play very drunk music
+        if (activeAlcohol > 1 && activeCoffee == 0) {
+            if (gp.currentSong != 1) {
+                gp.stopMusic();
+                gp.playMusic(1);
+            }
+        }
+        // if 1 coffee play slightly fast music
+        if (activeAlcohol == 0 && activeCoffee == 1) {
+            if (gp.currentSong != 5) {
+                gp.stopMusic();
+                gp.playMusic(5);
+            }
+        }
+        // if 2 coffees play very fast music
+        if (activeAlcohol == 0 && activeCoffee > 1) {
+            if (gp.currentSong != 6) {
+                gp.stopMusic();
+                gp.playMusic(6);
+            }
+        }
+        // if coffee and alcohol at the same time play cross music
+//        if (activeAlcohol > 0 && activeCoffee > 0) {
+//            if (gp.currentSong != 6) {
+//                gp.stopMusic();
+//                gp.playMusic(6);
+//            }
+//        }
+    }
+
 }
+
+
+//getting drunk
+    // lasts 10 seconds
+    // music changes
+    // a little drunk at one drink
+    // very drunk at 2 drinks
+    // die at three drinks
