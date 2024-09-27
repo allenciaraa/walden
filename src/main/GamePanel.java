@@ -1,5 +1,6 @@
 package main;
 
+import character.Entity;
 import character.Player;
 import object.GameObject;
 import tile.TileManager;
@@ -38,6 +39,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Game State
     public GameObject[] objs = new GameObject[10];
+    public Entity npc;
+
     public int gameState;
     public final int titleState = 0;
     public final int charSelectState = 1;
@@ -54,6 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         as.setObjects();
+        as.setNPC();
         playMusic(0); // plays theme song from the time the game is opened
         gameState = titleState;
     }
@@ -90,6 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void update() {
         if (gameState == playState) {
             player.update();
+            npc.update();
         }
         if (gameState == pauseState) {
 
@@ -105,12 +110,14 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == playState) {
             player.setPlayerImages();
 
+
             // map
             tm.draw(g2);
 
             //player
             player.draw(g2);
 
+            //
 //            ui.draw(g2);
 
             for (GameObject obj : objs) {
@@ -118,6 +125,8 @@ public class GamePanel extends JPanel implements Runnable {
                     obj.draw(g2, this);
                 }
             }
+
+            npc.draw(g2);
         }
 
         ui.draw(g2);

@@ -11,7 +11,6 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Player extends Entity {
-    GamePanel gp;
     KeyHandler kh;
 
     public final int screenX;
@@ -27,7 +26,8 @@ public class Player extends Entity {
     int swayCtr = 15;
 
     public Player(GamePanel gp, KeyHandler kh) {
-        this.gp = gp;
+        super(gp);
+
         this.kh = kh;
 
         screenX = (gp.screenWidth/2) - (gp.tileSize/2);
@@ -115,6 +115,9 @@ public class Player extends Entity {
             int objIdx = gp.cc.checkObject(this, true);
             pickUpObject(objIdx);
 
+            // check for NPC collision
+            boolean npcClash = gp.cc.checkNPC(this, gp.npc);
+            if (npcClash) { interactNPC(); }
 
             if (!collisionOn) {
                 if (activeAlcohol > 0) {
@@ -336,6 +339,10 @@ public class Player extends Entity {
 //                gp.playMusic(6);
 //            }
 //        }
+    }
+
+    public void interactNPC() {
+        System.out.println("you're hitting the ghost");
     }
 
 }

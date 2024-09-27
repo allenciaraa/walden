@@ -1,5 +1,6 @@
 package main;
 
+import character.ThoreauNPC;
 import object.Alcohol;
 import object.Coffee;
 import object.Door;
@@ -51,5 +52,11 @@ public class Assets {
         gp.objs[8].worldY = 38 * gp.tileSize;
 
 
+    }
+
+    public void setNPC() {
+        gp.npc = new ThoreauNPC(gp);
+        gp.npc.worldX = gp.tileSize*29;
+        gp.npc.worldY = gp.tileSize*14;
     }
 }
