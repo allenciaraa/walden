@@ -89,6 +89,16 @@ public class KeyHandler implements KeyListener {
             if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
                 rightPressed = true;
             }
+
+            if (gp.dialogueState) {
+                if (keyCode == KeyEvent.VK_ENTER) {
+                    gp.dialogueState = false;
+                    gp.player.speed = 2;
+                    gp.npc.speed = 2;
+                }
+            }
+
+
             if (keyCode == KeyEvent.VK_P) {
                 System.out.println("PAUSE TEST TEST");
                 gp.gameState = gp.pauseState;

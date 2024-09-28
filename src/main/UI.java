@@ -19,6 +19,7 @@ public class UI {
     public String msg = "";
     int msgCounter = 0;
     public boolean gameFinished = false;
+    public String currentDialogue = "";
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -56,6 +57,11 @@ public class UI {
         }
         if (gp.gameState == gp.pauseState) {
             drawPauseScreen();
+        }
+        if (gp.dialogueState) {
+            drawDialogueScreen();
+            gp.player.speed = 0;
+            gp.npc.speed = 0;
         }
     }
 
@@ -222,6 +228,32 @@ public class UI {
 
         }
 
+    }
+
+    public void drawDialogueScreen() {
+
+        // Dialogue Window
+        int x = gp.tileSize;
+        int y = gp.tileSize / 2;
+        int width = gp.screenWidth - (gp.tileSize * 4);
+        int height = gp.tileSize*3;
+        drawSubWindow(x, y, width, height);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+        x += gp.tileSize;
+        y += gp.tileSize;
+        g2.drawString(currentDialogue, x, y);
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height) {
+        Color c = new Color(0, 0, 0, 220);
+        g2.setColor(c);
+        g2.fillRoundRect(x, y, width, height, 35, 35);
+
+        c = new Color(255, 255, 255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(2));
+        g2.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 35, 35);
     }
 
     public int getXForCenteredText(String text) {

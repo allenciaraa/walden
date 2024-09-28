@@ -342,7 +342,8 @@ public class Player extends Entity {
     }
 
     public void interactNPC() {
-        System.out.println("you're hitting the ghost");
+        gp.dialogueState = true;
+        gp.npc.speak();
     }
 
 }

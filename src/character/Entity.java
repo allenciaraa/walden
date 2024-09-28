@@ -21,6 +21,8 @@ public class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
+    public String dialogues[] = new String[20];
+    public int dialogueIdx = 0;
 
     public int actCtr = 0;
 
@@ -30,6 +32,10 @@ public class Entity {
     }
 
     public void setAction() {
+
+    }
+
+    public void speak() {
 
     }
 
