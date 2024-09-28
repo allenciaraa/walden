@@ -59,11 +59,11 @@ public class ThoreauNPC extends Entity {
     public void setDialogue() {
         dialogues[0] = "ohmygodohmygodohmygod";
         dialogues[1] = "you HAVE to help me";
-        dialogues[2] = "it's me, HDT, i've come back from the dead to find my missing manuscript";
-        dialogues[3] = "i know i left it around here somewhere...";
-        dialogues[4] = "but anyway i gotta go be dead or whatever";
-        dialogues[5] = "please bring all three pages to my cabin, like, asap!";
-        dialogues[6] = "thanks bestie, i need to destress after all this.";
+        dialogues[2] = "it's me, HDT.\ni've come back from the dead to \nfind my missing manuscript";
+        dialogues[3] = "i know i left it around here \nsomewhere...";
+        dialogues[4] = "but anyway i gotta go be dead\n or whatever";
+        dialogues[5] = "please bring all three pages to my \ncabin, like, asap!";
+        dialogues[6] = "thanks bestie, i need to destress \nafter all this.";
     }
 
     public void speak() {

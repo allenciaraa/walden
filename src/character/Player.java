@@ -343,6 +343,8 @@ public class Player extends Entity {
 
     public void interactNPC() {
         gp.dialogueState = true;
+        gp.npc.speed = 0;
+        gp.player.speed = 0;
         gp.npc.speak();
     }
 

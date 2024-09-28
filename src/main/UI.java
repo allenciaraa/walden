@@ -240,9 +240,17 @@ public class UI {
         drawSubWindow(x, y, width, height);
 
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
-        x += gp.tileSize;
-        y += gp.tileSize;
-        g2.drawString(currentDialogue, x, y);
+
+        y += gp.tileSize/2;
+
+        for (String line : currentDialogue.split("\n")) {
+            int l = (int) g2.getFontMetrics().getStringBounds(line, g2).getWidth();
+            x = gp.tileSize + (width / 2) - (l / 2);
+            y += gp.tileSize / 2;
+            g2.drawString(line, x, y);
+        }
+
+
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
