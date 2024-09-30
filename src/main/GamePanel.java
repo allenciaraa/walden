@@ -36,7 +36,6 @@ public class GamePanel extends JPanel implements Runnable {
     public Collision cc = new Collision(this);
     public Assets as = new Assets(this);
     public Player player = new Player(this, kh);
-    public CutsceneManager csm = new CutsceneManager(this);
     public ScriptReader sr = new ScriptReader();
 
 
@@ -122,9 +121,6 @@ public class GamePanel extends JPanel implements Runnable {
 
             //player
             player.draw(g2);
-
-            // cutscene
-            csm.draw(g2);
 
             for (GameObject obj : objs) {
                 if (obj != null) {

@@ -232,17 +232,17 @@ public class UI {
             }
 
             if (csCt > 180) {
-                x = gp.screenWidth / 2;
+                x = gp.screenWidth / 2 + (gp.tileSize);
                 drawSubWindow(x, y, gp.screenWidth / 4, gp.tileSize * 2);
                 String text = "Do I have to?";
                 g2.drawString(text, x + gp.tileSize / 2, y + gp.tileSize);
             }
 
-            x = gp.tileSize * 3;
+            x = gp.tileSize * 4;
             y = gp.tileSize * 4;
             g2.drawImage(ghost, x, y, gp.tileSize * 3, gp.tileSize * 3, null);
 
-            x += gp.tileSize * 3;
+            x += gp.tileSize * 4;
             g2.drawImage(playerAvatar, x, y, gp.tileSize * 3, gp.tileSize * 3, null);
 
             csCt++;
