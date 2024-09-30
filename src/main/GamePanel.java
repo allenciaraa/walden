@@ -1,5 +1,6 @@
 package main;
 
+import Helper.ScriptReader;
 import character.Entity;
 import character.Player;
 import object.GameObject;
@@ -35,6 +36,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Collision cc = new Collision(this);
     public Assets as = new Assets(this);
     public Player player = new Player(this, kh);
+    public CutsceneManager csm = new CutsceneManager(this);
+    public ScriptReader sr = new ScriptReader();
 
 
     // Game State
@@ -46,7 +49,9 @@ public class GamePanel extends JPanel implements Runnable {
     public final int charSelectState = 1;
     public final int playState = 2;
     public final int pauseState = 3;
+    public final int finalCutSceneState = 4;
     public boolean dialogueState = false;
+
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -97,8 +102,8 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             npc.update();
         }
-        if (gameState == pauseState) {
-
+        if (gameState == finalCutSceneState) {
+            ui.drawCutScene();
         }
 
 
@@ -118,8 +123,8 @@ public class GamePanel extends JPanel implements Runnable {
             //player
             player.draw(g2);
 
-            //
-//            ui.draw(g2);
+            // cutscene
+            csm.draw(g2);
 
             for (GameObject obj : objs) {
                 if (obj != null) {

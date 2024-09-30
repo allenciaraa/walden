@@ -1,5 +1,6 @@
 package main;
 
+import Helper.ScriptReader;
 import object.Page;
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -20,6 +21,11 @@ public class UI {
     int msgCounter = 0;
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public String currentCutSceneText = "You've actually done it";
+    int csCt = 0;
+    int manIdx = 0;
+    int manY = 0;
+
 
     public UI(GamePanel gp) {
         this.gp = gp;
@@ -92,17 +98,9 @@ public class UI {
         g2.setColor(Color.BLACK);
         text = "NEW GAME";
         x = getXForCenteredText(text);
-        y += gp.tileSize*3;
+        y += gp.tileSize*4;
         g2.drawString(text, x, y);
         if (menuNum == 0) {
-            g2.drawString(">", x-gp.tileSize, y);
-        }
-
-        text = "TUTORIAL";
-        x = getXForCenteredText(text);
-        y += gp.tileSize;
-        g2.drawString(text, x, y);
-        if (menuNum == 1) {
             g2.drawString(">", x-gp.tileSize, y);
         }
 
@@ -110,7 +108,7 @@ public class UI {
         x = getXForCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
-        if (menuNum == 2) {
+        if (menuNum == 1) {
             g2.drawString(">", x-gp.tileSize, y);
         }
     }
@@ -177,6 +175,116 @@ public class UI {
 
     }
 
+    public void drawCutScene() {
+        gp.player.speed = 0;
+        if (csCt < 240) {
+            g2.setColor(new Color(96, 122, 66));
+            g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+            BufferedImage ghost = null;
+            BufferedImage playerAvatar = null;
+
+            try {
+                ghost = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/ghost_thoreau/sprite_0.png")));
+                if (gp.player.name.equals("vonnegut")) {
+                    playerAvatar = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/vonnegut/front.png")));
+                } else if (gp.player.name.equals("plath")) {
+                    playerAvatar = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/plath/front.png")));
+                } else {
+                    playerAvatar = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/hemingway/front.png")));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            int x = gp.tileSize / 2;
+            int y = gp.tileSize / 2;
+            drawSubWindow(x, y, gp.tileSize * 7 + (gp.tileSize / 2), gp.tileSize * 3);
+
+            // DRAW CUT SCENE TEXT;
+            x += gp.tileSize / 2;
+            y += gp.tileSize;
+            g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 32F));
+
+            g2.drawString(currentCutSceneText, x, y);
+
+//        int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+            if (csCt >= 10 && csCt <= 40) {
+                if (csCt % 10 == 0) {
+                    for (int i = 0; i < csCt / 10; i++) {
+                        currentCutSceneText += ".";
+                    }
+                }
+            }
+
+            g2.drawString(currentCutSceneText, x, y);
+
+            if (csCt > 60) {
+                String text = "You found my missing masterpiece.";
+                y += gp.tileSize / 2;
+                g2.drawString(text, x, y);
+            }
+
+            if (csCt > 120) {
+                String text = "Wanna read it?";
+                y += gp.tileSize / 2;
+                g2.drawString(text, x, y);
+            }
+
+            if (csCt > 180) {
+                x = gp.screenWidth / 2;
+                drawSubWindow(x, y, gp.screenWidth / 4, gp.tileSize * 2);
+                String text = "Do I have to?";
+                g2.drawString(text, x + gp.tileSize / 2, y + gp.tileSize);
+            }
+
+            x = gp.tileSize * 3;
+            y = gp.tileSize * 4;
+            g2.drawImage(ghost, x, y, gp.tileSize * 3, gp.tileSize * 3, null);
+
+            x += gp.tileSize * 3;
+            g2.drawImage(playerAvatar, x, y, gp.tileSize * 3, gp.tileSize * 3, null);
+
+            csCt++;
+        } else {
+            drawManuscript();
+        }
+
+    }
+
+    public void drawManuscript() {
+        g2.setColor(new Color(0, 0, 0));
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 26F));
+        g2.setColor(new Color(255, 255, 255));
+
+        int y = manY;
+
+        for (int i = 0; i < 10; i++) {
+            String text = gp.sr.lines[manIdx + i];
+
+            if (text != null) {
+                g2.drawString(text, getXForCenteredText(text), y);
+            } else {
+                g2.drawString(" ", gp.screenWidth/2, y - gp.tileSize/2);
+            }
+
+            y += gp.tileSize;
+        }
+
+        if (csCt % 5 == 0) {
+            manY--;
+        }
+
+        if (manY < -60) {
+            manY = 0;
+            manIdx++;
+        }
+
+    }
+
+
     public void drawPauseScreen() {
         String text = "PAUSED";
         int x = getXForCenteredText(text);
@@ -186,19 +294,7 @@ public class UI {
 
     public void drawUI() {
         if (gameFinished) {
-            g2.setColor(Color.YELLOW);
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
-            String text = "Congratulations!";
-            int x = getXForCenteredText(text);
-            int y = gp.tileSize*4;
-            g2.drawString(text, x, y);
-
-            g2.setColor(Color.BLACK);
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 32F));
-            text = "You found the missing manuscript!";
-            x = getXForCenteredText(text);
-            y += gp.tileSize;
-            g2.drawString(text, x, y);
+            drawCutScene();
         } else {
             int x = gp.tileSize/2;
             int y = gp.tileSize/2;

@@ -39,9 +39,6 @@ public class KeyHandler implements KeyListener {
                     gp.gameState = gp.charSelectState;
                 }
                 if (gp.ui.menuNum == 1) {
-                    // TODO: implement tutorial
-                }
-                if (gp.ui.menuNum == 2) {
                     System.exit(0);
                 }
             }
@@ -56,7 +53,7 @@ public class KeyHandler implements KeyListener {
             }
             if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT) {
                 gp.ui.writerNum++;
-                if (gp.ui.writerNum > 2) {
+                if (gp.ui.writerNum > 1) {
                     gp.ui.writerNum = 0;
                 }
             }
@@ -93,8 +90,10 @@ public class KeyHandler implements KeyListener {
             if (gp.dialogueState) {
                 if (keyCode == KeyEvent.VK_ENTER) {
                     gp.dialogueState = false;
-                    gp.player.speed = 2;
-                    gp.npc.speed = 2;
+                    gp.player.speed = 4;
+                    if (gp.npc.dialogueIdx == 6) {
+                        gp.npc.speed = 2;
+                    }
                 }
             }
 
@@ -130,6 +129,5 @@ public class KeyHandler implements KeyListener {
         if (keyCode == KeyEvent.VK_D  || keyCode == KeyEvent.VK_RIGHT) {
             rightPressed = false;
         }
-
     }
 }

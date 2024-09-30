@@ -16,7 +16,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
 
-    String name = "vonnegut";
+    public String name = "vonnegut";
     public int hasPages = 0;
     public int activeAlcohol = 0;
     int alcoholCtr = 0;
@@ -277,7 +277,8 @@ public class Player extends Entity {
                     gp.objs[idx] = null;
                     break;
                 case "Door":
-                    if (hasPages < 3) {
+                    // TODO: replace with hasPages < 3 after testing
+                    if (hasPages < -1) {
                         gp.playSoundEffect(4);
                         gp.ui.showMessage("You need to complete the manuscript. Get " + (3 - hasPages) + " more!");
                     } else {
