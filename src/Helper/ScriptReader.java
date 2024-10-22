@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ScriptReader {
 
-    String[] scriptNames = {"twilight-script-clean", "bee-movie", "shrek-clean"};
+    String[] scriptNames = {"twilight", "bee-movie", "shrek"};
     public String[] lines = new String[9999];
 
     public ScriptReader() {
@@ -26,14 +26,6 @@ public class ScriptReader {
             r.close();
         } catch (Exception e) {
             System.out.println("error");
-            e.printStackTrace();
-        }
-    }
-
-    public void cleanScript() {
-        try {
-            FileWriter w = new FileWriter("res/text/shrek-clean.txt");
-        } catch (Exception e) {
             e.printStackTrace();
         }
     }

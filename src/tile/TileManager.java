@@ -18,7 +18,7 @@ public class TileManager {
 
     public TileManager(GamePanel gp) {
         this.gp = gp;
-        tile = new Tile[55];
+        tile = new Tile[70];
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         setTileImages();
         loadMap("/maps/map_world01.csv");
@@ -69,13 +69,31 @@ public class TileManager {
         setup(42, "42_water_forest_btm_left.PNG", true);
         setup(43, "43_water_forest_top_right.PNG", true);
         setup(44, "44_water_forest_top_left.PNG", true);
-        setup(45, "45_roof_upward.PNG", true);
-        setup(46, "46_roof_top.PNG", true);
-        setup(47, "47_roof_solid.PNG", true);
-        setup(48, "48_roof_downward.PNG", true);
-        setup(49, "49_brick_window.PNG", true);
-        setup(50, "50_door.PNG", false);
-        setup(51, "51_brick.PNG", true);
+        setup(45, "45_house.png", true);
+        setup(46, "46_house.png", true);
+        setup(47, "47_house.png", true);
+        setup(48, "48_house.png", true);
+        setup(49, "49_house.png", false);
+        setup(50, "50_house.png", true);
+        setup(51, "51_house.png", true);
+        setup(52, "52_house.png", true);
+        setup(53, "53_house.png", true);
+        setup(54, "54_house.png", true);
+        setup(55, "55_house.png", true);
+        setup(56, "56_house.png", true);
+        setup(57, "57_house.png", true);
+        setup(58, "58_house.png", true);
+        setup(59, "59_house.png", true);
+        setup(60, "60_house.png", true);
+        setup(61, "61_house.png", true);
+        setup(62, "62_house.png", true);
+        setup(63, "63_house.png", true);
+        setup(64, "64_house.png", true);
+        setup(65, "65_house.png", true);
+        setup(66, "66_house.png", true);
+        setup(67, "67_house.png", true);
+        setup(68, "68_house.png", true);
+        setup(69, "69_house.png", true);
     }
 
     public void setup(int idx, String name, boolean collision) {

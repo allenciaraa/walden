@@ -277,8 +277,7 @@ public class Player extends Entity {
                     gp.objs[idx] = null;
                     break;
                 case "Door":
-                    // TODO: replace with hasPages < 3 after testing
-                    if (hasPages < -1) {
+                    if (hasPages < 3) {
                         gp.playSoundEffect(4);
                         gp.ui.showMessage("You need to complete the manuscript. Get " + (3 - hasPages) + " more!");
                     } else {

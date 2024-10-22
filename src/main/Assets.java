@@ -48,7 +48,7 @@ public class Assets {
         gp.objs[7].worldY = 38 * gp.tileSize;
 
         gp.objs[8] = new Door();
-        gp.objs[8].worldX = 36 * gp.tileSize;
+        gp.objs[8].worldX = 38 * gp.tileSize;
         gp.objs[8].worldY = 38 * gp.tileSize;
 
 
