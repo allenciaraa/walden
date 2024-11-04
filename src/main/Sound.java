@@ -17,6 +17,7 @@ public class Sound {
         soundURL[4] = getClass().getResource("/sound/pickup.wav");
         soundURL[5] = getClass().getResource("/sound/goldenpiefast.wav");
         soundURL[6] = getClass().getResource("/sound/goldenpiefaster.wav");
+        soundURL[7] = getClass().getResource("/sound/youwon.wav");
     }
 
     public void setFile(int i) {

@@ -37,6 +37,7 @@ public class KeyHandler implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER) {
                 if (gp.ui.menuNum == 0) {
                     gp.gameState = gp.charSelectState;
+                    keyCode = KeyEvent.VK_SPACE;
                 }
                 if (gp.ui.menuNum == 1) {
                     System.exit(0);
@@ -53,23 +54,25 @@ public class KeyHandler implements KeyListener {
             }
             if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_RIGHT) {
                 gp.ui.writerNum++;
-                if (gp.ui.writerNum > 1) {
+                if (gp.ui.writerNum > 2) {
                     gp.ui.writerNum = 0;
                 }
             }
 
-            if (keyCode == KeyEvent.VK_SPACE) {
+            if (keyCode == KeyEvent.VK_ENTER) {
 
                 if (gp.ui.writerNum == 0) {
-                    gp.player.setPlayerName("hemingway");
+                    gp.player.setPlayerName("plath");
                 }
                 if (gp.ui.writerNum == 1) {
-                    gp.player.setPlayerName("plath");
+                    gp.player.setPlayerName("hemingway");
                 }
                 if (gp.ui.writerNum == 2) {
                     gp.player.setPlayerName("vonnegut");
                 }
                 gp.gameState = gp.playState;
+
+
             }
         }
 
@@ -128,6 +131,9 @@ public class KeyHandler implements KeyListener {
         }
         if (keyCode == KeyEvent.VK_D  || keyCode == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+        if (keyCode == KeyEvent.VK_ENTER) {
+            enterPressed = false;
         }
     }
 }

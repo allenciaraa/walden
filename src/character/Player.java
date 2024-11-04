@@ -284,7 +284,7 @@ public class Player extends Entity {
                         gp.objs[idx] = null;
                         gp.ui.gameFinished = true;
                         gp.stopMusic();
-                        gp.playSoundEffect(3);
+                        gp.playSoundEffect(7);
                     }
                     break;
             }

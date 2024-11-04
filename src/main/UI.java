@@ -144,32 +144,33 @@ public class UI {
         int textY;
         int picY;
 
-        String name = "Hemingway";
-        x = gp.tileSize;
+        String name = "Plath";
+        x = gp.tileSize + gp.tileSize/2;
         picY = y + gp.tileSize*2 + 5;
         textY = picY + gp.tileSize*2 + (gp.tileSize/2);
-        g2.drawImage(hemingway, x, picY, gp.tileSize*2, gp.tileSize*2, null);
+        g2.drawImage(plath, x, picY, gp.tileSize*2, gp.tileSize*2, null);
+        x += gp.tileSize/2 + 5;
         g2.drawString(name, x, textY);
         if (writerNum == 0) {
-            g2.drawString(">", x-(gp.tileSize/2), textY);
+            g2.drawString(">", x-gp.tileSize/2, textY);
         }
 
-        name = "Plath";
-        x = gp.screenWidth/2 - (gp.tileSize);
-        g2.drawImage(plath, x, picY, gp.tileSize*2, gp.tileSize*2, null);
-        x += gp.tileSize/2 + 8;
+        name = "Hemingway";
+        x = gp.screenWidth/2 - (gp.tileSize) - 8;
+        g2.drawImage(hemingway, x - 8, picY, gp.tileSize*2, gp.tileSize*2, null);
+        x -= 10;
         g2.drawString(name, x, textY);
         if (writerNum == 1) {
-            g2.drawString(">", x-(gp.tileSize/2), textY);
+            g2.drawString(">", x-gp.tileSize/2, textY);
         }
 
         name = "Vonnegut";
-        x += gp.tileSize*3;
+        x += gp.tileSize*3 + gp.tileSize/2;
         g2.drawImage(vonnegut, x, picY, gp.tileSize*2, gp.tileSize*2, null);
         x += 8;
         g2.drawString(name, x, textY);
         if (writerNum == 2) {
-            g2.drawString(">", x-(gp.tileSize/2), textY);
+            g2.drawString(">", x-gp.tileSize/2, textY);
         }
 
 
@@ -233,7 +234,7 @@ public class UI {
 
             if (csCt > 180) {
                 x = gp.screenWidth / 2 + (gp.tileSize);
-                drawSubWindow(x, y, gp.screenWidth / 4, gp.tileSize * 2);
+                drawSubWindow(x, y, gp.screenWidth / 3, gp.tileSize * 2);
                 String text = "Do I have to?";
                 g2.drawString(text, x + gp.tileSize / 2, y + gp.tileSize);
             }
